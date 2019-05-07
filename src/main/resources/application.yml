@@ -1,5 +1,6 @@
 spring:
   datasource:
+    #请配置自己的数据库信息
     username: root
     password: 888888
     url: jdbc:mysql://localhost/springboot2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -12,10 +13,6 @@ spring:
   thymeleaf:
     cache: false
   redis:
+    #此处配置Redis服务器IP地址，需自己手动配置
     host: 192.168.127.133
-    #配置邮箱
-  mail:
-    username: 302902521@qq.com
-    password: vxjjjzhsaqubbhgj
-    host: smtp.qq.com
-    properties: {mail.smtp.ssl.enable: true}
+
