@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--基于bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:replace="admin/login::admnav"></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        用户ID
+                    </th>
+                    <th>
+                        订单数额
+                    </th>
+                    <th>
+                        订单日期
+                    </th>
+                    <th>
+                        订单状态
+                    </th>
+                    <th>
+                        操作
+                    </th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order:${orders}">
+                    <td th:text="${order.id}">
+                        1
+                    </td>
+                    <td th:text="${order.user.id}">
+                        2
+                    </td>
+                    <td th:text="${order.getOrderPrice()}">
+                        3
+                    </td>
+                    <td th:text="${order.getOrderTime()}">
+                        3
+                    </td>
+                    <td th:text="${order.getStatus()}">
+                        3
+                    </td>
+                    <td>
+                        <a th:href="@{/deleteOrder(orderId=${order.id})}" th:text="删除订单" class="btn btn-default">删除订单</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

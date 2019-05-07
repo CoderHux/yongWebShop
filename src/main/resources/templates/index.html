@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--基于bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default" role="navigation"  th:fragment="mynav">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#" th:href="@{/index}">首页</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a th:href="@{/login}" th:if="not ${session.user}">请登录</a>
+                            <a href="#" th:if="${session.user}" th:href="@{/user}" th:text="${session.user.userName}+ 你好">请登录</a>
+                        </li>
+                        <li>
+                            <a href="#" th:if="not ${session.user}" th:text="请注册" th:href="@{/regist}">Link</a>
+                        </li>
+
+                    </ul>
+                    <!--搜索表单-->
+                    <form class="navbar-form navbar-left" role="search" action="/search">
+                        <div class="form-group">
+                            <!-- 该输入框用于获得搜索商品的名字 -->
+                            <input name="productName" class="form-control" type="text" />
+                        </div> <button class="btn btn-default" type="submit">查找商品</button>
+                    </form>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a th:href="@{/admin}">管理员入口</a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg disabled" th:if="not ${session.user}">查看订单</a>
+                            <a href="#" th:href="@{/checkBill(userId=${session.user.id})}" th:if="${session.user}">查看订单</a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg disabled" th:if="not ${session.user}">查看购物车</a>
+                            <a href="#" th:href="@{/buyCar}" th:if="${session.user}">查看购物车</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        产品
+                    </th>
+                    <th>
+                        商品介绍
+                    </th>
+                    <th>
+                        库存
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="product:${session.products}">
+                    <td th:text="${product.getId()}">
+                        1
+                    </td>
+                    <td th:text="${product.name}">
+                        TB - Monthly
+                    </td>
+                    <td th:text="${product.intro}">
+                        01/04/2012
+                    </td>
+                    <td th:text="${product.num}">
+                        Default
+                    </td>
+
+                    <td>
+                        <a href="#" th:href="@{/addCar(prodId=${product.id})}" class="btn btn-default" th:if="${session.user}">加入购物车</a>
+                        <a href="#" th:href="@{/addCar(prodId=${product.id})}" class="btn btn-default disabled" th:if="not ${session.user}">加入购物车</a>
+                    </td>
+                    <td>
+                        <a href="#"  th:href="@{/buy(prodId=${product.id})}" class="btn btn-default disabled" th:if=" not ${session.user}">下单</a>
+                        <a href="#"  th:href="@{/buy(prodId=${product.id})}" class="btn btn-default" th:if="${session.user}">下单</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+           <center> <ul class="pagination" >
+                <li th:class="${session.pageNow == 1}?'disabled':''">
+                    <a href="#" th:href="@{/page(index=${session.pageNow}-1)}">Prev</a>
+                </li>
+                <li th:each="i :${session.pageNum}"  th:class="${session.pageNow == i}?'active disable':''" >
+                    <a href="#"  th:href="@{/page(index=${i})}" th:text="${i}"> 1</a>
+                </li>
+
+                <li th:class="${session.pageNow == session.pageNum.size()}?'disabled':''">
+                    <a href="#" th:href="@{/page(index=${session.pageNow}+1)}" >Next</a>
+                </li>
+            </ul></center>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

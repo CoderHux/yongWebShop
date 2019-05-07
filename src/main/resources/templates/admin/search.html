@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--基于bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:replace="admin/login::admnav"></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        用户名
+                    </th>
+                    <th>
+                        用户真名
+                    </th>
+                    <th>
+                        注册日期
+                    </th>
+                    <th>
+                        操作
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${user_search}">
+                    <td th:text="${user.id}">
+                        1
+                    </td>
+                    <td th:text="${user.userName}">
+                        2
+                    </td>
+                    <td th:text="${user.realName}">
+                        3
+                    </td>
+                    <td th:text="${user.regDate}">
+                        3
+                    </td>
+                    <td>
+                        <a th:href="@{/deleteUser(userId=${user.id})}" th:text="删除用户" class="btn btn-default">删除用户</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

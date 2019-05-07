@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--基于bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:replace="index::mynav"></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        价格
+                    </th>
+                    <th>
+                        下单日期
+                    </th>
+                    <th>
+                        订单状态
+                    </th>
+                    <th>
+                        操作
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item:${order}">
+                    <td th:text="${item.getId()}">
+                        1
+                    </td>
+                    <td th:text="${item.getOrderPrice()}">
+                        TB - Monthly
+                    </td>
+                    <td th:text="${item.getOrderTime()}">
+                        01/04/2012
+                    </td>
+                    <td th:text="${item.getStatus()}">
+                        Default
+                    </td>
+
+                    <td>
+                        <a href="#"  th:href="@{/orderDetail(orderId=${item.id})}" class="btn btn-default">查看详情</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

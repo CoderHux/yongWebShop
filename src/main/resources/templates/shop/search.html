@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--基于bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div th:replace="index::mynav"></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        产品
+                    </th>
+                    <th>
+                        商品介绍
+                    </th>
+                    <th>
+                        库存
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="product:${searchList}">
+                    <td th:text="${product.getId()}">
+                        1
+                    </td>
+                    <td th:text="${product.name}">
+                        TB - Monthly
+                    </td>
+                    <td th:text="${product.intro}">
+                        01/04/2012
+                    </td>
+                    <td th:text="${product.num}">
+                        Default
+                    </td>
+
+                    <td>
+                        <a href="#" th:href="@{/addCar(prodId=${product.id})}" class="btn btn-default" th:if="${session.user}">加入购物车</a>
+                        <a href="#" th:href="@{/addCar(prodId=${product.id})}" class="btn btn-default disabled" th:if="not ${session.user}">加入购物车</a>
+                    </td>
+                    <td>
+                        <a href="#"  th:href="@{/buy(prodId=${product.id})}" class="btn btn-default disabled" th:if=" not ${session.user}">下单</a>
+                        <a href="#"  th:href="@{/buy(prodId=${product.id})}" class="btn btn-default" th:if="${session.user}">下单</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

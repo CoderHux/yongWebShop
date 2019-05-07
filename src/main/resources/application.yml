@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    username: root
+    password: 888888
+    url: jdbc:mysql://localhost/springboot2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties: {hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect}
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.127.133
+    #配置邮箱
+  mail:
+    username: 302902521@qq.com
+    password: vxjjjzhsaqubbhgj
+    host: smtp.qq.com
+    properties: {mail.smtp.ssl.enable: true}
